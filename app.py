@@ -60,7 +60,7 @@ def run_inference(inf_file):
     print("Prob Array ", prob_array)
     prob = max(softmax(result[0][0]))
     print("Prob ",prob)
-    species = tf.argmax(prob_array.ravel()[:10]).numpy()
+    species = tf.argmax(prob_array.ravel()[:20]).numpy()
     print("Class Label ", species)
     print("Spec ", CLASS_MAP[species][1])
     string_label = CLASS_MAP[species][1].split(" ")
