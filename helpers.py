@@ -1,5 +1,4 @@
 import numpy as np
-apt install libgl1-mesa-glx
 import cv2
 from albumentations import Compose, Normalize, Resize
 
