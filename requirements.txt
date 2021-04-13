@@ -11,5 +11,4 @@ itsdangerous
 Jinja2
 MarkupSafe
 Werkzeug
-torchvision
 boto3
