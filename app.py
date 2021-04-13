@@ -3,9 +3,9 @@ from flask import Blueprint, jsonify
 import numpy as np
 import tensorflow as tf
 import onnxruntime
-import cv2
-import boto3
-from botocore.exceptions import NoCredentialsError
+#import cv2
+#import boto3
+#from botocore.exceptions import NoCredentialsError
 from thresholdingfunction import otsuthresholding
 from classify import load_model, load_image_fromnumpy, predict_single
 from torchvision import datasets, models, transforms
@@ -19,13 +19,13 @@ from helpers import (load_image, make_square,
 from helper_config import (IMG_HEIGHT, IMG_WIDTH, CLASS_MAP,
                            CHANNELS)
 
-from datetime import datetime
+#from datetime import datetime
 
 
-ACCESS_KEY ='AKIA2U5YERTOYQY77S5M'
+#ACCESS_KEY ='AKIA2U5YERTOYQY77S5M'
 
-SECRET_KEY = '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'
-BUCKET='photostakenduringpilotstudy'
+#SECRET_KEY = 'uPeQV2WAhAyb5SGpPr7lqvmgqLECnF5s3TeifFmd'
+#BUCKET='photostakenduringpilotstudy'
 
 # Usually helps in debugging
 print(tf.__version__) # Print the version of tensorflow being used
@@ -46,14 +46,14 @@ def get_label():
     inf_fileread = request.files.get('image').read()
     print("Got the file")
     label = run_inference(inf_fileread)
-    now = datetime.now()
-    date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
+    #now = datetime.now()
+    #date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
     
-    fname = date_time + "_" + MosqID + "_" + PicNum + "_" + SiteID + "_" + label[0] + "_" + label[1] + "_attatchedlens.jpg"
+    #fname = date_time + "_" + MosqID + "_" + PicNum + "_" + SiteID + "_" + label[0] + "_" + label[1] + "_attatchedlens.jpg"
     ##fname = "mypic.jpg"
-    s3 = boto3.client('s3',aws_access_key_id= ACCESS_KEY, aws_secret_access_key= SECRET_KEY)
-    status=upload_to_aws(inf_file, BUCKET, fname)
-    print(status)
+    #s3 = boto3.client('s3',aws_access_key_id= ACCESS_KEY, aws_secret_access_key= SECRET_KEY)
+    #status=upload_to_aws(inf_file, BUCKET, fname)
+    #print(status)
     
     return jsonify({
         "genus": label[0],
@@ -62,21 +62,21 @@ def get_label():
         "color_code": label[3]
     })
   
-def upload_to_aws(local_file, bucket, s3_file):
-    s3 = boto3.client('s3', aws_access_key_id=ACCESS_KEY,
-                      aws_secret_access_key=SECRET_KEY)
-
-    try:
-        s3.upload_fileobj(local_file, bucket, s3_file)
-        ##s3.upload_file(local_file, bucket, s3_file)
-        print("Upload Successful")
-        return True
-    except FileNotFoundError:
-        print("The file was not found")
-        return False
-    except NoCredentialsError:
-        print("Credentials not available")
-        return False
+#def upload_to_aws(local_file, bucket, s3_file):
+#    s3 = boto3.client('s3', aws_access_key_id=ACCESS_KEY,
+#                      aws_secret_access_key=SECRET_KEY)
+#
+#    try:
+#        s3.upload_fileobj(local_file, bucket, s3_file)
+#        ##s3.upload_file(local_file, bucket, s3_file)
+#        print("Upload Successful")
+#        return True
+#    except FileNotFoundError:
+#        print("The file was not found")
+#        return False
+#    except NoCredentialsError:
+#        print("Credentials not available")
+#        return False
 
 def color_code(num):
     if(float(num)>0.9):
