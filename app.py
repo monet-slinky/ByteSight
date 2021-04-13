@@ -7,7 +7,7 @@ import onnxruntime
 #import boto3
 #from botocore.exceptions import NoCredentialsError
 from thresholdingfunction import otsuthresholding
-from classify import load_model, load_image_fromnumpy, predict_single
+#from classify import load_model, load_image_fromnumpy, predict_single
 from torchvision import datasets, models, transforms
 import torch
 import os
