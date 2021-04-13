@@ -13,3 +13,4 @@ MarkupSafe
 Werkzeug
 boto3
 torch
+torchvision
