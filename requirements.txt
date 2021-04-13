@@ -12,4 +12,4 @@ Jinja2
 MarkupSafe
 Werkzeug
 boto3
-torch==1.4.0
+torch
