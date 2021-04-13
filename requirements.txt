@@ -1,6 +1,8 @@
 Flask
 onnx==1.6.0
 onnxruntime==1.2.0
+tensorflow==2.0.0
+tensorflow-estimator==2.0.1
 numpy
 opencv-python-headless
 albumentations
@@ -12,5 +14,3 @@ Werkzeug
 boto3
 torch
 torchvision
-tensorflow==2.0.0
-tensorflow-estimator==2.0.1
