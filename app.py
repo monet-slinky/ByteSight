@@ -7,7 +7,7 @@ import cv2
 import boto3
 from botocore.exceptions import NoCredentialsError
 from thresholdingfunction import otsuthresholding
-#from classify import load_model, load_image_fromnumpy, predict_single
+from classify import load_model, load_image_fromnumpy, predict_single
 from torchvision import datasets, models, transforms
 import torch
 import os
@@ -21,11 +21,11 @@ from helper_config import (IMG_HEIGHT, IMG_WIDTH, CLASS_MAP,
 
 from datetime import datetime
 
-##ACCESS_KEY = 'AKIAJA6OT4ISIU6Q4PBA'
-ACCESS_KEY ='AKIA2U5YERTOYQY77S5M'
-###SECRET_KEY = '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'
-SECRET_KEY = 'uPeQV2WAhAyb5SGpPr7lqvmgqLECnF5s3TeifFmd'
-BUCKET='photostakenduringpilotstudy'
+
+##ACCESS_KEY ='AKIA2U5YERTOYQY77S5M'
+
+##SECRET_KEY = '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'
+##BUCKET='photostakenduringpilotstudy'
 
 # Usually helps in debugging
 print(tf.__version__) # Print the version of tensorflow being used
@@ -51,9 +51,9 @@ def get_label():
     
     fname = date_time + "_" + MosqID + "_" + PicNum + "_" + SiteID + "_" + label[0] + "_" + label[1] + "_attatchedlens.jpg"
     ##fname = "mypic.jpg"
-    s3 = boto3.client('s3',aws_access_key_id= ACCESS_KEY, aws_secret_access_key= SECRET_KEY)
-    status=upload_to_aws(inf_file, BUCKET, fname)
-    print(status)
+    #s3 = boto3.client('s3',aws_access_key_id= ACCESS_KEY, aws_secret_access_key= SECRET_KEY)
+    #status=upload_to_aws(inf_file, BUCKET, fname)
+    #print(status)
     
     return jsonify({
         "genus": label[0],
