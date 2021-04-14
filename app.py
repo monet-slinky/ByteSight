@@ -3,6 +3,15 @@ from flask import Blueprint, jsonify
 import numpy as np
 import tensorflow as tf
 import onnxruntime
+import cv2
+import boto3
+from botocore.exceptions import NoCredentialsError
+
+from helpers import (load_image, make_square, 
+                     augment, pre_process, softmax)
+from helper_config import (IMG_HEIGHT, IMG_WIDTH, CLASS_MAP,
+                           CHANNELS)
+from datetime import datetime
 
 from thresholdingfunction import otsuthresholding
 #from classify import load_model, load_image_fromnumpy, predict_single
@@ -13,16 +22,10 @@ from blackandwhiteratios import blackandwhiteratio
 
 
 from boundingbox import cropImage
-
-
 from helpers import (load_image, make_square, 
                      augment, pre_process, softmax)
 from helper_config import (IMG_HEIGHT, IMG_WIDTH, CLASS_MAP,
                            CHANNELS)
-from boundingBox import cropImage
-
-
-#from datetime import datetime
 
 
 #ACCESS_KEY ='AKIA2U5YERTOYQY77S5M'
@@ -42,7 +45,6 @@ prep = pre_process(IMG_WIDTH, IMG_HEIGHT)
 @moz.route("/get_label", methods=['GET', 'POST'])
 def get_label():
     inf_file = request.files.get('image')
-    ##inf_file = request.files.get('image').read()
     MosqID = request.form.get('MosquitoID')
     PicNum = request.form.get('PictureNumber')
     SiteID = request.form.get('SiteID')
