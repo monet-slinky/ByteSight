@@ -94,7 +94,7 @@ def color_code(num):
 
 def run_inference(inf_file):
     # Preprocessing of the image happens here
-    useless, img, status=cropImage(impath, 'm', labelsfile, 21, 0.08)
+    useless, img, status=cropImage(inf_fileread, 'm', labels.txt, 21, 0.08)
     print("Image Loaded")
     img = make_square(img)
     img = augment(prep, img)
