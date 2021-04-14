@@ -92,7 +92,7 @@ def color_code(num):
     else:
         return '#f7543b'
 
-def run_inference(inf_file):
+def run_inference(inf_fileread):
     # Preprocessing of the image happens here
     useless, img, status=cropImage(inf_fileread, 'm', labels.txt, 21, 0.08)
     print("Image Loaded")
