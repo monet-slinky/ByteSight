@@ -22,13 +22,13 @@ from helper_config import (IMG_HEIGHT, IMG_WIDTH, CLASS_MAP,
 
 from boundingbox import cropImage
 
-#from datetime import datetime
+from datetime import datetime
 
 
-#ACCESS_KEY ='AKIA2U5YERTOYQY77S5M'
+ACCESS_KEY ='AKIA2U5YERTOYQY77S5M'
 
-#SECRET_KEY = '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'
-#BUCKET='photostakenduringpilotstudy'
+SECRET_KEY = 'uPeQV2WAhAyb5SGpPr7lqvmgqLECnF5s3TeifFmd'
+BUCKET='photostakenduringpilotstudy'
 
 # Usually helps in debugging
 print(tf.__version__) # Print the version of tensorflow being used
@@ -49,14 +49,14 @@ def get_label():
     inf_fileread = request.files.get('image').read()
     print("Got the file")
     label = run_inference(inf_fileread)
-    #now = datetime.now()
-    #date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
+    now = datetime.now()
+    date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
     
-    #fname = date_time + "_" + MosqID + "_" + PicNum + "_" + SiteID + "_" + label[0] + "_" + label[1] + "_attatchedlens.jpg"
-    ##fname = "mypic.jpg"
-    #s3 = boto3.client('s3',aws_access_key_id= ACCESS_KEY, aws_secret_access_key= SECRET_KEY)
-    #status=upload_to_aws(inf_file, BUCKET, fname)
-    #print(status)
+    fname = date_time + "_" + MosqID + "_" + PicNum + "_" + SiteID + "_" + label[0] + "_" + label[1] + "_attatchedlens.jpg"
+    fname = "mypic.jpg"
+    s3 = boto3.client('s3',aws_access_key_id= ACCESS_KEY, aws_secret_access_key= SECRET_KEY)
+    status=upload_to_aws(inf_file, BUCKET, fname)
+    print(status)
     
     return jsonify({
         "genus": label[0],
@@ -65,21 +65,21 @@ def get_label():
         "color_code": label[3]
     })
   
-#def upload_to_aws(local_file, bucket, s3_file):
-#    s3 = boto3.client('s3', aws_access_key_id=ACCESS_KEY,
-#                      aws_secret_access_key=SECRET_KEY)
-#
-#    try:
-#        s3.upload_fileobj(local_file, bucket, s3_file)
-#        ##s3.upload_file(local_file, bucket, s3_file)
-#        print("Upload Successful")
-#        return True
-#    except FileNotFoundError:
-#        print("The file was not found")
-#        return False
-#    except NoCredentialsError:
-#        print("Credentials not available")
-#        return False
+def upload_to_aws(local_file, bucket, s3_file):
+    s3 = boto3.client('s3', aws_access_key_id=ACCESS_KEY,
+                      aws_secret_access_key=SECRET_KEY)
+
+    try:
+        s3.upload_fileobj(local_file, bucket, s3_file)
+        ##s3.upload_file(local_file, bucket, s3_file)
+        print("Upload Successful")
+        return True
+    except FileNotFoundError:
+        print("The file was not found")
+        return False
+    except NoCredentialsError:
+        print("Credentials not available")
+        return False
 
 def color_code(num):
     if(float(num)>0.9):
