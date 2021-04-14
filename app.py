@@ -15,7 +15,7 @@ import os
 from blackandwhiteratios import blackandwhiteratio
 
 
-#from boundingbox import cropImage
+
 
 
 from helpers import (load_image, make_square, 
@@ -56,7 +56,7 @@ def get_label():
     date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
     
     fname = date_time + "_" + MosqID + "_" + PicNum + "_" + SiteID + "_" + label[0] + "_" + label[1] + "_attatchedlens.jpg"
-    fname = "mypic.jpg"
+    
     s3 = boto3.client('s3',aws_access_key_id= ACCESS_KEY, aws_secret_access_key= SECRET_KEY)
     status=upload_to_aws(inf_file, BUCKET, fname)
     print(status)
