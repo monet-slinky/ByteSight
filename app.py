@@ -19,7 +19,7 @@ from helpers import (load_image, make_square,
                      augment, pre_process, softmax)
 from helper_config import (IMG_HEIGHT, IMG_WIDTH, CLASS_MAP,
                            CHANNELS)
-from boundingBox import cropImage
+
 
 
 #from datetime import datetime
