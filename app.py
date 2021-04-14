@@ -12,7 +12,7 @@ import os
 from blackandwhiteratios import blackandwhiteratio
 
 
-from boundingbox import cropImage
+#from boundingbox import cropImage
 
 
 from helpers import (load_image, make_square, 
@@ -20,7 +20,7 @@ from helpers import (load_image, make_square,
 from helper_config import (IMG_HEIGHT, IMG_WIDTH, CLASS_MAP,
                            CHANNELS)
 
-
+from boundingbox import cropImage
 
 #from datetime import datetime
 
