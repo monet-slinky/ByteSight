@@ -1,8 +1,8 @@
 Flask
-tensorflow==2.0.0
-tensorflow-estimator==2.0.1
 onnx==1.6.0
 onnxruntime==1.2.0
+tensorflow==2.0.0
+tensorflow-estimator==2.0.1
 numpy
 opencv-python-headless
 albumentations
@@ -11,3 +11,5 @@ itsdangerous
 Jinja2
 MarkupSafe
 Werkzeug
+boto3
+torchvision
