@@ -28,9 +28,9 @@ from boundingbox import cropImage
 from datetime import datetime
 
 
-ACCESS_KEY ='AKIA2U5YERTOSGE2IQUI'
+ACCESS_KEY ='AKIA2U5YERTOSCS5DVML'
 ###SECRET_KEY = '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'
-SECRET_KEY = 'LKTHnYvFQU6TiIx9oiNhudE2Y4muMDjvyPu+ojUX'
+SECRET_KEY = '16EEZ/2fGUiGugjUP26h8Qn/p9r4kIKd3lzZeldJ'
 BUCKET='photostakenduringpilotstudy'
 
 # Usually helps in debugging
