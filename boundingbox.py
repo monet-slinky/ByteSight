@@ -12,6 +12,7 @@ from thresholdingfunction import otsuthresholding
 from torchvision import datasets, models, transforms
 import torch
 import os
+import cv2
 from blackandwhiteratios import blackandwhiteratio
 
 def removeBorder(image):
