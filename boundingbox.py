@@ -56,8 +56,8 @@ def cropImage(image_file, modality, labelsfile, steps,scale):
       return objectimage
     # for convenience atm, not putting an else statement but this is effectively "else"
     objectdictionary = {}
-    objectimage = cv2.imread(image_file,0)
-    blurredimage = cv2.medianBlur(objectimage ,5)
+    
+    blurredimage = cv2.medianBlur(image_file ,5)
     objectimage2 = otsuthresholding(blurredimage)
     kernel = np.ones((5, 5), np.uint8)
     img_erosion = cv2.erode(objectimage2, kernel, iterations=1)
@@ -194,26 +194,22 @@ def cropImage(image_file, modality, labelsfile, steps,scale):
     # code, in case you want to see the objects highlighted on the original image
     # in real time. It might not work, but it did at some point, in a different
     # environment.
-    #model = load_model(modelfile, labelsfile)
-    colorimage = cv2.imread(image_file)
+   
+    colorimage = image_file
     coordinates = {}
     coordinates['miny'] = []
     coordinates['maxy'] = []
     coordinates['minx'] = []
     coordinates['maxx'] = []
     scores = []
-    filenameofimage=image_file
-    if filenameofimage[-4] == 'm':
+
+    if modality== 'm':
         thresholdarea = 50
-    elif filenameofimage[-4] == 'p':
+    elif modality== 'p':
         thresholdarea = 100    
     else:
         thresholdarea = 20
     for k in objectdictionary:
-        #print(k)
-        #objectcoordinates = objectdictionary[k]
-        #        help on sorting tuples found here
-        # https://stackoverflow.com/questions/14802128/tuple-pairs-finding-minimum-using-python
         objectcoordinates = np.array(objectdictionary[k])
         if len(objectcoordinates) < thresholdarea:
             continue
@@ -235,40 +231,7 @@ def cropImage(image_file, modality, labelsfile, steps,scale):
         if maxy == miny:
             continue
         croppedimage = colorimage[miny:maxy+1,minx:maxx+1]
-        #cv2.imshow('image',croppedimage)
-        #cv2.waitKey(500)
-        #newerimage2 = cv2.resize(newimage, (800, 400))
-        #cv2.imshow('image', newerimage2)
-        #cv2.waitKey(500)
-        #clone = image.copy()
-        #clone = cv2.rectangle(clone, (minx, miny), (maxx, maxy), (0, 255, 0), 2)
-        #clone2 = cv2.resize(clone, (800,400))
-        #cv2.imshow("Window", clone2)
-        #cv2.waitKey(700)
-        #tensor_img = load_image_fromnumpy(croppedimage)
-
-        ##### THIS IS WHERE THE PREDICTIONCOME IN THAT WE DO NOT HAVE 
-        '''
-        resultlist = predict_single(model, tensor_img)
-        index_max = np.argmax(resultlist)
-        print(index_max)
-        ###############################################################################
-        # With the most likely class being produced, we then have three cases.
-        # 1. Index == 0, The first class is a bad crop. We just skip and move to the
-        # next object.
-        # 2. Index == 1, The second class is a good crop. This is the best case
-        # scenario. Here, we simply append the bounding box coordinates to our master
-        # list of coordinates.
-        # 3. Index == 2, The third and final class is a truncated crop. This suggests
-        # that
-        ###############################################################################
-        
-        if index_max == 0:
-            continue
-        elif index_max == 1:
-            scores.append(resultlist[1])
-            print('found one')
-        '''
+   
         bands = 10
         miny = miny - bands
         maxy = maxy + bands
@@ -285,7 +248,7 @@ def cropImage(image_file, modality, labelsfile, steps,scale):
           newcoordinates = False
           status = 'False'
         elif len(coordinates['miny']) == 1:
-            #print('mosquito found')
+            print('mosquito found')
             newcoordinates = {}
             newcoordinates['miny'] = min(coordinates['miny'])
             newcoordinates['maxy'] = max(coordinates['maxy'])
@@ -324,8 +287,8 @@ def cropImage(image_file, modality, labelsfile, steps,scale):
 
 def main():
     #test_file="/content/drive/MyDrive/Colab Notebooks/VT/vectech-classification/data/cropped/cropped/aedes/aegypti/JHU-001849_04m.jpg"
-    test_file = "/content/201207_160327.jpg"
-    labelsfile = 'labels.txt'
-    cropImage(test_file, 'm', labelsfile,5, 0.08)
+    #test_file = "/content/201207_160327.jpg"
+    #labelsfile = 'labels.txt'
+    #cropImage(test_file, 'm', labelsfile,5, 0.08)
 if __name__ == '__main__':
     main()
